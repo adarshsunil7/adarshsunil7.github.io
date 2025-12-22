@@ -39,7 +39,7 @@
     <div class="d-flex flex-column">
 
       <div class="profile">
-        <img src="assets/img/pro.JPG" alt="" clasAlexs="img-fluid rounded-circle">
+        <img src="assets/img/pro.JPG" alt="" class="img-fluid rounded-circle">
         <h1 class="text-light"><a href="index.html"> Adarsh Sunil</a></h1>
         <div class="social-links mt-3 text-center">
           <a href="https://twitter.com/AdarshSunil17?s=09" class="twitter"><i class="bx bxl-twitter"></i></a>
@@ -67,12 +67,20 @@
 
   <!-- ======= Hero Section ======= -->
 
-  <!-- d-flex flex-column justify-content-center align-items-center -->
-
-  <section id="hero" class="d-flex flex-column justify-content-center align-items-center" alt="Responsive image">
-    <div class="hero-container" data-aos="fade-in">
+  <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
+    <!-- Floating Particles -->
+    <div class="hero-particles">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="hero-container" data-aos="fade-in" data-aos-duration="1200">
       <h1>Adarsh Sunil</h1>
-      <p>I'm <span class="typed" data-typed-items="Software Engineer,Athlete,Content Creator"></span></p>
+      <p>I'm <span class="typed" data-typed-items="Software Engineer,Athlete,Content Creator,Problem Solver"></span></p>
     </div>
   </section><!-- End Hero -->
 
@@ -82,7 +90,7 @@
     <section id="about" class="about">
       <div class="container">
 
-        <div class="section-title">
+        <div class="section-title" data-aos="fade-up" data-aos-duration="800">
           <h2>About</h2>
           <ul style="list-style-image: url('assets/img/bullets/new1.png')">
           <li> For now it's just me ADARSH SUNIL.</li>
@@ -95,10 +103,10 @@
         </div>
 
         <div class="row">
-          <div class="col-lg-4" data-aos="fade-right">
+          <div class="col-lg-4" data-aos="fade-right" data-aos-duration="1000">
             <img src="assets/img/pro.JPG" class="img-fluid" alt="">
           </div>
-          <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
+          <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
             <h3>Career Objective</h3>
             <p class="fst-italic">
               Hi I'm Adarsh ,A Software Engineer who loves building quality softwares.
@@ -181,14 +189,14 @@
     <section id="skills" class="skills section-bg">
       <div class="container">
 
-        <div class="section-title">
+        <div class="section-title" data-aos="fade-up" data-aos-duration="800">
           <h2>Skills</h2>
           <p>A Software Engineer who loves to enhance my skills and knowledge in software development.</p>
         </div>
 
         <div class="row skills-content">
 
-          <div class="col-lg-6" data-aos="fade-up">
+          <div class="col-lg-6" data-aos="fade-up" data-aos-duration="1000">
 
             <div class="progress">
               <span class="skill">Python <i class="val">90%</i></span>
@@ -224,7 +232,7 @@
             </div>
           </div>
 
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
 
             <div class="progress">
               <span class="skill">JAVA <i class="val">80%</i></span>
@@ -269,14 +277,14 @@
     <section id="resume" class="resume">
       <div class="container">
 
-        <div class="section-title">
+        <div class="section-title" data-aos="fade-up" data-aos-duration="800">
           <h2>Resume</h2>
           <p>Seeking a challenging and rewarding opportunity as in an organization 
             of repute that recognizes my true potential and effectively nurtures my technical skills.</p>
         </div>
 
         <div class="row">
-          <div class="col-lg-6" data-aos="fade-up">
+          <div class="col-lg-6" data-aos="fade-up" data-aos-duration="1000">
             <h3 class="resume-title">Sumary</h3>
             <div class="resume-item pb-0">
               <h4>Adarsh Sunil</h4>
@@ -320,7 +328,7 @@
               <p>Saraswathi Vidyanikethan Public School, Elamakkara</p>
             </div>
           </div>
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
             <h3 class="resume-title">Projects</h3>
             <div class="resume-item">
               <h4>SPICYO.COM</h4>
@@ -662,17 +670,17 @@
                   <input type="text" name="name" class="form-control" id="name" required>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="name">Your Email</label>
+                  <label for="email">Your Email</label>
                   <input type="email" class="form-control" name="email" id="email" required>
                 </div>
               </div>
               <div class="form-group">
-                <label for="name">Subject</label>
+                <label for="subject">Subject</label>
                 <input type="text" class="form-control" name="subject" id="subject" required>
               </div>
               <div class="form-group">
-                <label for="name">Message</label>
-                <textarea class="form-control" name="message" rows="10" required></textarea>
+                <label for="message">Message</label>
+                <textarea class="form-control" name="message" id="message" rows="10" required></textarea>
               </div>
               <div class="my-3">
                 <div class="loading">Loading</div>

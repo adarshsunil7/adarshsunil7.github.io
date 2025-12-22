@@ -11,6 +11,12 @@
 body {
   font-family: "Open Sans", sans-serif;
   color: #272829;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+body.page-loaded {
+  opacity: 1;
 }
 
 a {
@@ -215,6 +221,8 @@ h1, h2, h3, h4, h5, h6 {
   height: 100vh;
   background: url("../img/adarsh.JPG") top center;
   background-size: cover;
+  position: relative;
+  overflow: hidden;
 }
 
 #hero:before {
@@ -240,6 +248,8 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   line-height: 56px;
   color: #fff;
+  animation: slideInDown 1s ease-out;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 #hero p {
@@ -247,6 +257,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 50px;
   font-size: 26px;
   font-family: "Poppins", sans-serif;
+  animation: slideInUp 1s ease-out 0.3s both;
 }
 
 #hero p span {
@@ -280,6 +291,14 @@ h1, h2, h3, h4, h5, h6 {
 section {
   padding: 60px 0;
   overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+section.revealed {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .section-bg {
@@ -453,6 +472,36 @@ section {
   margin-top: -2px;
   border-left: 2px solid #1f5297;
   position: relative;
+  border-image: linear-gradient(180deg, #149ddd, #6f42c1) 1;
+  padding-left: 25px;
+  transition: all 0.3s ease;
+}
+
+.resume .resume-item:hover {
+  transform: translateX(5px);
+  background: rgba(20, 157, 221, 0.03);
+  border-radius: 0 10px 10px 0;
+}
+
+.resume .resume-item::before {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50px;
+  left: -9px;
+  top: 0;
+  background: #fff;
+  border: 2px solid #1f5297;
+  background: linear-gradient(135deg, #149ddd, #0dcaf0);
+  border: 3px solid #fff;
+  box-shadow: 0 0 10px rgba(20, 157, 221, 0.4);
+  transition: all 0.3s ease;
+}
+
+.resume .resume-item:hover::before {
+  transform: scale(1.3);
+  box-shadow: 0 0 20px rgba(20, 157, 221, 0.6);
 }
 
 .resume .resume-item h4 {
@@ -472,6 +521,13 @@ section {
   display: inline-block;
   font-weight: 600;
   margin-bottom: 10px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.resume .resume-item:hover h5 {
+  background: linear-gradient(135deg, #149ddd, #0dcaf0);
+  color: #fff;
 }
 
 .resume .resume-item ul {
@@ -484,18 +540,6 @@ section {
 
 .resume .resume-item:last-child {
   padding-bottom: 0;
-}
-
-.resume .resume-item::before {
-  content: "";
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  border-radius: 50px;
-  left: -9px;
-  top: 0;
-  background: #fff;
-  border: 2px solid #1f5297;
 }
 
 /*--------------------------------------------------------------
@@ -816,6 +860,31 @@ section {
   background: #fff;
   width: 100%;
   box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 20px;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact .info::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(20, 157, 221, 0.03), transparent);
+  transform: rotate(45deg);
+  transition: all 0.6s ease;
+}
+
+.contact .info:hover::before {
+  left: 100%;
+}
+
+.contact .info:hover {
+  box-shadow: 0 10px 40px rgba(20, 157, 221, 0.15);
+  transform: translateY(-5px);
 }
 
 .contact .info i {
@@ -885,6 +954,8 @@ section {
   padding: 30px;
   background: #fff;
   box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 20px;
+  transition: all 0.4s ease;
 }
 
 .contact .php-email-form .form-group {
@@ -947,6 +1018,8 @@ section {
 
 .contact .php-email-form label {
   padding-bottom: 8px;
+  color: #050d18;
+  font-weight: 500;
 }
 
 .contact .php-email-form input, .contact .php-email-form textarea {
@@ -1070,5 +1143,828 @@ section {
     position: static;
     width: auto;
     padding-right: 20px 15px;
+  }
+}
+
+/*--------------------------------------------------------------
+# Enhanced Modern Animations & Effects
+--------------------------------------------------------------*/
+
+/* Smooth page-wide transitions */
+* {
+  scroll-behavior: smooth;
+}
+
+/* Gradient text effect for headings */
+.gradient-text {
+  background: linear-gradient(135deg, #149ddd 0%, #0dcaf0 50%, #6f42c1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Enhanced profile image with animated border */
+#header .profile img {
+  border: 4px solid transparent;
+  background: linear-gradient(#040b14, #040b14) padding-box,
+              linear-gradient(135deg, #149ddd, #0dcaf0, #6f42c1) border-box;
+  transition: all 0.4s ease;
+  animation: profilePulse 3s ease-in-out infinite;
+  border-radius: 50%;
+}
+
+#header .profile img:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 25px rgba(20, 157, 221, 0.5);
+}
+
+@keyframes profilePulse {
+  0%, 100% { box-shadow: 0 0 10px rgba(20, 157, 221, 0.3); }
+  50% { box-shadow: 0 0 25px rgba(20, 157, 221, 0.6); }
+}
+
+/* Enhanced social links with pop effect */
+#header .profile .social-links a {
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+#header .profile .social-links a::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s, height 0.4s;
+}
+
+#header .profile .social-links a:hover::before {
+  width: 150%;
+  height: 150%;
+}
+
+#header .profile .social-links a:hover {
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 10px 20px rgba(20, 157, 221, 0.3);
+}
+
+/* Hero Section Enhancements */
+#hero {
+  position: relative;
+  overflow: hidden;
+}
+
+#hero::before {
+  background: linear-gradient(135deg, rgba(5, 13, 24, 0.7) 0%, rgba(20, 157, 221, 0.3) 100%);
+  animation: heroGradient 8s ease infinite;
+}
+
+@keyframes heroGradient {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 0.9; }
+}
+
+#hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 80%, rgba(20, 157, 221, 0.15) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(111, 66, 193, 0.15) 0%, transparent 50%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+#hero h1 {
+  animation: slideInDown 1s ease-out;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#hero p {
+  animation: slideInUp 1s ease-out 0.3s both;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Floating particles effect (CSS only) */
+.hero-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-particles span {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: rgba(20, 157, 221, 0.5);
+  border-radius: 50%;
+  animation: float 15s infinite;
+}
+
+.hero-particles span:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 12s; }
+.hero-particles span:nth-child(2) { left: 20%; animation-delay: 2s; animation-duration: 14s; }
+.hero-particles span:nth-child(3) { left: 35%; animation-delay: 4s; animation-duration: 16s; }
+.hero-particles span:nth-child(4) { left: 50%; animation-delay: 0s; animation-duration: 18s; }
+.hero-particles span:nth-child(5) { left: 65%; animation-delay: 3s; animation-duration: 13s; }
+.hero-particles span:nth-child(6) { left: 80%; animation-delay: 5s; animation-duration: 15s; }
+.hero-particles span:nth-child(7) { left: 90%; animation-delay: 1s; animation-duration: 17s; }
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(100vh) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) scale(1);
+    opacity: 0;
+  }
+}
+
+/* Enhanced Section Titles with animated underline */
+.section-title h2 {
+  position: relative;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.section-title h2::after {
+  transition: width 0.5s ease-in-out;
+  background: linear-gradient(90deg, #149ddd, #0dcaf0, #6f42c1);
+  height: 4px;
+  border-radius: 2px;
+}
+
+.section-title h2:hover::after {
+  width: 100%;
+}
+
+/* Glassmorphism cards for About section */
+.about .content {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.4s ease;
+  color: #272829;
+}
+
+.about .content h3 {
+  color: #173b6c;
+}
+
+.about .content p {
+  color: #272829;
+}
+
+.about .content ul li {
+  color: #272829;
+}
+
+.about .content ul li span {
+  color: #272829;
+}
+
+.about .content:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(20, 157, 221, 0.15);
+}
+
+/* Enhanced profile image in about */
+.about .col-lg-4 img {
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.about .col-lg-4 img:hover {
+  transform: scale(1.03) rotate(2deg);
+  box-shadow: 0 20px 40px rgba(20, 157, 221, 0.25);
+}
+
+/* Animated skill bars with gradient */
+.skills .progress-bar {
+  background: linear-gradient(90deg, #149ddd, #0dcaf0, #6f42c1);
+  background-size: 200% 100%;
+  animation: skillGradient 3s ease infinite;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(20, 157, 221, 0.3);
+}
+
+@keyframes skillGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.skills .progress-bar-wrap {
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+}
+
+.skills .progress-bar-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: skillShine 2s ease-in-out infinite;
+}
+
+@keyframes skillShine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Enhanced Resume Timeline */
+.resume .resume-item {
+  border-left: 3px solid;
+  border-image: linear-gradient(180deg, #149ddd, #6f42c1) 1;
+  padding-left: 25px;
+  transition: all 0.3s ease;
+}
+
+.resume .resume-item:hover {
+  transform: translateX(5px);
+  background: rgba(20, 157, 221, 0.03);
+  border-radius: 0 10px 10px 0;
+}
+
+.resume .resume-item::before {
+  background: linear-gradient(135deg, #149ddd, #0dcaf0);
+  border: 3px solid #fff;
+  box-shadow: 0 0 10px rgba(20, 157, 221, 0.4);
+  transition: all 0.3s ease;
+}
+
+.resume .resume-item:hover::before {
+  transform: scale(1.3);
+  box-shadow: 0 0 20px rgba(20, 157, 221, 0.6);
+}
+
+.resume .resume-item h5 {
+  background: linear-gradient(135deg, #e4edf9, #f0f5ff);
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.resume .resume-item:hover h5 {
+  background: linear-gradient(135deg, #149ddd, #0dcaf0);
+  color: #fff;
+}
+
+/* Enhanced Contact Section */
+.contact .info {
+  border-radius: 20px;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact .info::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(20, 157, 221, 0.03), transparent);
+  transform: rotate(45deg);
+  transition: all 0.6s ease;
+}
+
+.contact .info:hover::before {
+  left: 100%;
+}
+
+.contact .info:hover {
+  box-shadow: 0 10px 40px rgba(20, 157, 221, 0.15);
+  transform: translateY(-5px);
+}
+
+.contact .info i {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.contact .info .address:hover i,
+.contact .info .email:hover i {
+  transform: scale(1.2) rotate(10deg);
+}
+
+/* Enhanced Form Styling */
+.contact .php-email-form {
+  border-radius: 20px;
+  transition: all 0.4s ease;
+}
+
+.contact .php-email-form:hover {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+.contact .php-email-form input,
+.contact .php-email-form textarea {
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  padding: 12px 15px;
+}
+
+.contact .php-email-form input:focus,
+.contact .php-email-form textarea:focus {
+  border-color: #149ddd;
+  box-shadow: 0 0 15px rgba(20, 157, 221, 0.2);
+  transform: translateY(-2px);
+}
+
+.contact .php-email-form button[type="submit"] {
+  background: linear-gradient(135deg, #149ddd, #0dcaf0);
+  border-radius: 30px;
+  padding: 12px 40px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact .php-email-form button[type="submit"]::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.contact .php-email-form button[type="submit"]:hover::before {
+  left: 100%;
+}
+
+.contact .php-email-form button[type="submit"]:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(20, 157, 221, 0.4);
+}
+
+/* Enhanced Back to Top Button */
+.back-to-top {
+  background: linear-gradient(135deg, #149ddd, #0dcaf0);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 15px rgba(20, 157, 221, 0.3);
+}
+
+.back-to-top:hover {
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 10px 25px rgba(20, 157, 221, 0.5);
+}
+
+/* Enhanced Navigation Menu */
+.nav-menu a {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.nav-menu a::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 0;
+  background: linear-gradient(180deg, #149ddd, #0dcaf0);
+  transition: height 0.3s ease;
+}
+
+.nav-menu a:hover::before,
+.nav-menu .active::before {
+  height: 100%;
+}
+
+.nav-menu a:hover,
+.nav-menu .active {
+  background: rgba(20, 157, 221, 0.1);
+}
+
+/* Tilt effect on cards (using CSS transforms) */
+.tilt-card {
+  transition: transform 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.tilt-card:hover {
+  transform: perspective(1000px) rotateX(5deg) rotateY(5deg) scale(1.02);
+}
+
+/* Text reveal animation */
+.text-reveal {
+  overflow: hidden;
+}
+
+.text-reveal span {
+  display: inline-block;
+  animation: textReveal 0.8s ease forwards;
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+@keyframes textReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Stagger animation delays */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+
+/* Enhanced Mobile Navigation Toggle */
+.mobile-nav-toggle {
+  background: linear-gradient(135deg, #149ddd, #0dcaf0);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 15px rgba(20, 157, 221, 0.4);
+}
+
+.mobile-nav-toggle:hover {
+  transform: scale(1.1) rotate(90deg);
+}
+
+/*--------------------------------------------------------------
+# Enhanced Responsive Design
+--------------------------------------------------------------*/
+
+/* Large Tablets and Small Desktops */
+@media (max-width: 1199px) {
+  .hero-container h1 {
+    font-size: 48px;
+  }
+
+  .section-title h2 {
+    font-size: 28px;
+  }
+}
+
+/* Tablets */
+@media (max-width: 991px) {
+  section {
+    padding: 50px 0;
+  }
+
+  .about .row {
+    text-align: center;
+  }
+
+  .about .col-lg-4 img {
+    max-width: 300px;
+    margin-bottom: 30px;
+  }
+
+  .contact .info {
+    margin-bottom: 30px;
+  }
+
+  .resume .col-lg-6 {
+    margin-bottom: 40px;
+  }
+}
+
+/* Mobile Devices */
+@media (max-width: 768px) {
+  #hero {
+    padding: 0 20px;
+  }
+
+  #hero h1 {
+    font-size: 32px;
+    line-height: 40px;
+    text-align: center;
+  }
+
+  #hero p {
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .section-title {
+    text-align: center;
+  }
+
+  .section-title h2::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .about .content {
+    padding: 20px;
+  }
+
+  .about .content ul {
+    text-align: left;
+  }
+
+  .skills .progress {
+    height: 50px;
+  }
+
+  .resume .resume-item {
+    padding-left: 15px;
+  }
+
+  .contact .info,
+  .contact .php-email-form {
+    padding: 20px;
+    border-radius: 15px;
+  }
+
+  .contact .mapouter,
+  .contact .gmap_canvas,
+  .contact .gmap_iframe {
+    width: 100% !important;
+  }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 480px) {
+  #hero h1 {
+    font-size: 26px;
+    line-height: 34px;
+  }
+
+  #hero p {
+    font-size: 16px;
+  }
+
+  .section-title h2 {
+    font-size: 24px;
+  }
+
+  .about .col-lg-4 img {
+    max-width: 200px;
+  }
+
+  .resume .resume-item h4 {
+    font-size: 16px;
+  }
+
+  .resume .resume-item h5 {
+    font-size: 14px;
+    padding: 4px 10px;
+  }
+
+  .contact .php-email-form button[type="submit"] {
+    padding: 10px 30px;
+    font-size: 14px;
+  }
+}
+
+/* Landscape orientation for mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  #hero {
+    height: auto;
+    min-height: 100vh;
+    padding: 60px 20px;
+  }
+
+  #hero h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+
+  #hero p {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .about .content,
+  .contact .info,
+  .contact .php-email-form {
+    background: rgba(255, 255, 255, 0.95);
+    color: #272829;
+  }
+
+  .about .content h3,
+  .about .content p,
+  .about .content ul li,
+  .contact .info h4,
+  .contact .info p,
+  .contact .php-email-form label {
+    color: #272829;
+  }
+
+  .contact .php-email-form input,
+  .contact .php-email-form textarea {
+    background: #fff;
+    color: #272829;
+  }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .section-title h2::after {
+    background: #149ddd;
+  }
+
+  .skills .progress-bar {
+    background: #149ddd;
+  }
+}
+
+/* Print styles */
+@media print {
+  #header,
+  .back-to-top,
+  .mobile-nav-toggle {
+    display: none !important;
+  }
+
+  #main {
+    margin-left: 0;
+  }
+
+  section {
+    page-break-inside: avoid;
+  }
+}
+
+/*--------------------------------------------------------------
+# Additional Interactive Effects
+--------------------------------------------------------------*/
+
+/* Cursor trail effect */
+.cursor-trail {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, rgba(20, 157, 221, 0.6) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: cursorFade 0.5s ease-out forwards;
+  z-index: 9999;
+}
+
+@keyframes cursorFade {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+
+/* Typing cursor animation enhancement */
+.typed-cursor {
+  animation: blink 1s infinite;
+  color: #149ddd;
+  font-weight: 100;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Link hover effect */
+a:not(.nav-link):not(.social-links a):not(.back-to-top) {
+  position: relative;
+}
+
+a:not(.nav-link):not(.social-links a):not(.back-to-top)::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #149ddd, #0dcaf0);
+  transition: width 0.3s ease;
+}
+
+a:not(.nav-link):not(.social-links a):not(.back-to-top):hover::after {
+  width: 100%;
+}
+
+/* Enhanced focus states for accessibility */
+*:focus {
+  outline: 2px solid #149ddd;
+  outline-offset: 2px;
+}
+
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 2px solid #149ddd;
+  outline-offset: 2px;
+}
+
+/* Loading shimmer effect for images */
+img:not([src]) {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: imgShimmer 1.5s infinite;
+}
+
+@keyframes imgShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Hover glow effect on interactive elements */
+.glow-hover {
+  transition: box-shadow 0.3s ease;
+}
+
+.glow-hover:hover {
+  box-shadow: 0 0 20px rgba(20, 157, 221, 0.4);
+}
+
+/* Bounce animation for scroll indicator */
+.scroll-indicator {
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Disable cursor trail on mobile */
+@media (max-width: 768px) {
+  .cursor-trail {
+    display: none;
   }
 }

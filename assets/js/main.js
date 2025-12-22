@@ -246,11 +246,71 @@
    */
   window.addEventListener('load', () => {
     AOS.init({
-      duration: 1000,
-      easing: 'ease-in-out',
+      duration: 800,
+      easing: 'ease-out-cubic',
       once: true,
-      mirror: false
+      mirror: false,
+      offset: 50,
+      anchorPlacement: 'top-bottom'
     })
   });
 
+  /**
+   * Enhanced parallax effect on hero section
+   */
+  const hero = select('#hero');
+  if (hero) {
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const rate = scrolled * 0.3;
+      hero.style.backgroundPositionY = `calc(50% + ${rate}px)`;
+    });
+  }
+
+  /**
+   * Smooth reveal effect for sections
+   */
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
+  };
+
+  const revealCallback = (entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  };
+
+  const revealObserver = new IntersectionObserver(revealCallback, observerOptions);
+
+  document.querySelectorAll('section').forEach(section => {
+    revealObserver.observe(section);
+  });
+
 })()
+
+/**
+ * Add cursor trail effect (subtle)
+ */
+document.addEventListener('mousemove', (e) => {
+  const cursor = document.createElement('div');
+  cursor.className = 'cursor-trail';
+  cursor.style.left = e.pageX + 'px';
+  cursor.style.top = e.pageY + 'px';
+  document.body.appendChild(cursor);
+
+  setTimeout(() => {
+    cursor.remove();
+  }, 500);
+});
+
+/**
+ * Add smooth page transitions
+ */
+document.addEventListener('DOMContentLoaded', () => {
+  document.body.classList.add('page-loaded');
+});
