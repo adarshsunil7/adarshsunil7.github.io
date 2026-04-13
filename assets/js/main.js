@@ -190,6 +190,12 @@
     updateParallax() {},
 
     initScrollReveal() {
+      const sections = document.querySelectorAll('section');
+      
+      sections.forEach(section => {
+        section.classList.add('animate-on-scroll');
+      });
+
       const observerOptions = {
         root: null,
         rootMargin: '0px',
@@ -207,7 +213,7 @@
 
       const revealObserver = new IntersectionObserver(revealCallback, observerOptions);
 
-      this.elements.sections.forEach(section => {
+      sections.forEach(section => {
         revealObserver.observe(section);
       });
     },

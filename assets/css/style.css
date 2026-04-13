@@ -453,12 +453,17 @@ button {
 section {
   padding: 60px 0;
   overflow: hidden;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+section.animate-on-scroll {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-section.revealed {
+section.animate-on-scroll.revealed {
   opacity: 1;
   transform: translateY(0);
 }
