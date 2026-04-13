@@ -146,22 +146,28 @@
     },
 
     initSkillsAnimation() {
-      const { skillsContent } = this.elements;
-      if (!skillsContent) return;
-
+      const skillCards = document.querySelectorAll('.skill-card');
+      
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            const progressBars = document.querySelectorAll('.progress-bar');
-            progressBars.forEach(bar => {
-              bar.style.width = bar.getAttribute('aria-valuenow') + '%';
-            });
+            const progressBar = entry.target.querySelector('.skill-progress');
+            if (progressBar) {
+              const width = progressBar.dataset.width;
+              setTimeout(() => {
+                progressBar.style.width = width + '%';
+                progressBar.classList.add('animated');
+              }, 100);
+            }
             observer.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.8 });
+      }, { threshold: 0.3 });
 
-      observer.observe(skillsContent);
+      skillCards.forEach((card, index) => {
+        card.style.transitionDelay = (index * 0.1) + 's';
+        observer.observe(card);
+      });
     },
 
     initAOS() {
