@@ -87,9 +87,9 @@
       this.state.isMobileNavActive = !this.state.isMobileNavActive;
       this.elements.body.classList.toggle('mobile-nav-active', this.state.isMobileNavActive);
       
-      if (this.mobileNavToggle) {
-        this.mobileNavToggle.classList.toggle('bi-list', !this.state.isMobileNavActive);
-        this.mobileNavToggle.classList.toggle('bi-x', this.state.isMobileNavActive);
+      if (this.elements.mobileNavToggle) {
+        this.elements.mobileNavToggle.classList.toggle('bi-list', !this.state.isMobileNavActive);
+        this.elements.mobileNavToggle.classList.toggle('bi-x', this.state.isMobileNavActive);
       }
     },
 
@@ -294,5 +294,12 @@
     }
   };
 
-  document.addEventListener('DOMContentLoaded', () => App.init());
+  document.addEventListener('DOMContentLoaded', () => {
+    try {
+      App.init();
+      console.log('Portfolio: Initialized successfully');
+    } catch (e) {
+      console.error('Portfolio init error:', e);
+    }
+  });
 })();
