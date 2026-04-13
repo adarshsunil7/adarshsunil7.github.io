@@ -497,60 +497,166 @@ section.animate-on-scroll.revealed {
 }
 
 .section-title h2:hover::after { width: 100%; }
-
-.about .row {
-  align-items: center;
+.about-img-wrapper {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
 }
 
-.about .content {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: var(--radius-lg);
-  padding: 30px;
-  box-shadow: var(--shadow-md);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all var(--transition-base);
+.about-img {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  transition: transform 0.5s ease;
 }
 
-.about .content:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
+.about-img-wrapper:hover .about-img {
+  transform: scale(1.05);
 }
 
-.about .content h3 {
+.about-img-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(20, 157, 221, 0.95), transparent);
+  padding: 30px 20px;
+  transform: translateY(100%);
+  transition: transform 0.4s ease;
+}
+
+.about-img-wrapper:hover .about-img-overlay {
+  transform: translateY(0);
+}
+
+.overlay-content {
+  color: #fff;
+  text-align: center;
+}
+
+.overlay-content .quote-mark {
+  font-size: 48px;
+  font-family: Georgia, serif;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.overlay-content p {
+  margin: 5px 0 0;
+  font-style: italic;
+  font-size: 14px;
+}
+
+.about-intro {
+  margin-bottom: 30px;
+}
+
+.about-intro h3 {
+  font-size: 28px;
   font-weight: 700;
-  font-size: 26px;
   color: var(--color-text-heading);
-}
-
-.about .content ul {
-  list-style: none;
-  padding: 0;
-}
-
-.about .content ul li {
   margin-bottom: 15px;
+  font-family: var(--font-poppins);
+}
+
+.about-intro p {
+  color: var(--color-text);
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+.about-traits {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.trait-item {
+  background: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.trait-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(20, 157, 221, 0.15);
+}
+
+.trait-icon {
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  border-radius: 12px;
   display: flex;
   align-items: center;
-  color: var(--color-text);
+  justify-content: center;
+  font-size: 24px;
+  color: #fff;
 }
 
-.about .content ul li i {
+.trait-text h4 {
   font-size: 16px;
-  margin-right: 8px;
+  font-weight: 600;
+  color: var(--color-dark-secondary);
+  margin-bottom: 5px;
+}
+
+.trait-text p {
+  font-size: 13px;
+  color: var(--color-text-light);
+  margin: 0;
+}
+
+.about-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.info-card {
+  background: #fff;
+  padding: 18px 20px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.info-card:hover {
+  box-shadow: 0 8px 25px rgba(20, 157, 221, 0.12);
+  transform: translateX(5px);
+}
+
+.info-card i {
+  font-size: 24px;
   color: var(--color-primary);
 }
 
-.about .col-lg-4 img {
-  border-radius: var(--radius-lg);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  transition: all 0.5s var(--transition-bounce);
+.info-card div {
+  display: flex;
+  flex-direction: column;
 }
 
-.about .col-lg-4 img:hover {
-  transform: scale(1.03) rotate(2deg);
-  box-shadow: 0 20px 40px rgba(20, 157, 221, 0.25);
+.info-label {
+  font-size: 12px;
+  color: var(--color-text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-value {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-dark-secondary);
 }
 
 .skill-card {
@@ -950,8 +1056,11 @@ section.animate-on-scroll.revealed {
   .section-title h2 { font-size: 28px; }
   .section-title { text-align: center; }
   .section-title h2::after { left: 50%; transform: translateX(-50%); }
-  .about .row { text-align: center; }
-  .about .col-lg-4 img { max-width: 250px; margin-bottom: 20px; }
+  
+  .about-img-wrapper { max-width: 300px; margin: 0 auto 30px; }
+  .about-traits { grid-template-columns: 1fr; }
+  .about-info-grid { grid-template-columns: 1fr; }
+  .info-card { justify-content: center; }
   
   .contact .info,
   .contact .php-email-form { padding: 20px; border-radius: 15px; }
