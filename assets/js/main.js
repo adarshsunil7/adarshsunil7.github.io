@@ -213,7 +213,8 @@
     },
 
     markPageLoaded() {
-      document.body.classList.add('page-loaded');
+      document.body.classList.remove('fade-out');
+      document.body.classList.add('fade-in');
     }
   };
 
