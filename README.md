@@ -75,10 +75,21 @@ Install the "Live Server" extension and click "Go Live"
 │   ├── js/
 │   │   └── main.js        # JavaScript modules
 │   └── vendor/            # Third-party libraries
-├── forms/
-│   └── contact.php        # Contact form backend (optional)
 └── README.md
 ```
+
+## Contact Form Setup
+
+The contact form uses **Formspree** for email delivery (no backend needed).
+
+### Setup Steps:
+1. Go to [formspree.io](https://formspree.io) and create a free account
+2. Create a new form and copy your form endpoint
+3. In `index.html`, replace `YOUR_FORM_ID` with your actual Formspree form ID:
+   ```html
+   <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="contact-form">
+   ```
+4. Messages will be delivered to your Formspree registered email
 
 ## Customization
 

@@ -19,6 +19,7 @@
       this.initAnimations();
       this.initParallax();
       this.initScrollReveal();
+      this.initContactForm();
       this.markPageLoaded();
     },
 
@@ -221,6 +222,47 @@
 
       sections.forEach(section => {
         revealObserver.observe(section);
+      });
+    },
+
+    initContactForm() {
+      const form = document.querySelector('.contact-form');
+      if (!form) return;
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const formStatus = form.querySelector('.form-status') || document.createElement('div');
+        formStatus.className = 'form-status';
+        formStatus.innerHTML = '<div class="loading">Sending...</div>';
+        form.appendChild(formStatus);
+
+        const submitBtn = form.querySelector('.btn-submit');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span>Sending...</span>';
+
+        try {
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+              'Accept': 'application/json'
+            }
+          });
+
+          if (response.ok) {
+            formStatus.innerHTML = '<div class="success">Message sent successfully! I\'ll get back to you soon.</div>';
+            form.reset();
+          } else {
+            formStatus.innerHTML = '<div class="error">Oops! Something went wrong. Please try again.</div>';
+          }
+        } catch (error) {
+          formStatus.innerHTML = '<div class="error">Oops! Something went wrong. Please try again.</div>';
+        }
+
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
       });
     },
 
