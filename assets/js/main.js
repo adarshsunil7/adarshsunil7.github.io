@@ -229,18 +229,30 @@
       const form = document.querySelector('.contact-form');
       if (!form) return;
 
+      const formStatus = document.createElement('div');
+      formStatus.className = 'form-status';
+      form.appendChild(formStatus);
+
+      const submitBtn = form.querySelector('.btn-submit');
+      const originalBtnHTML = submitBtn.innerHTML;
+
+      const inputs = form.querySelectorAll('input, textarea');
+
+      inputs.forEach(input => {
+        input.addEventListener('focus', () => {
+          formStatus.innerHTML = '';
+          formStatus.className = 'form-status';
+        });
+      });
+
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        const formStatus = form.querySelector('.form-status') || document.createElement('div');
+        formStatus.innerHTML = '<div class="loading"><span class="spinner"></span> Sending...</div>';
         formStatus.className = 'form-status';
-        formStatus.innerHTML = '<div class="loading">Sending...</div>';
-        form.appendChild(formStatus);
 
-        const submitBtn = form.querySelector('.btn-submit');
-        const originalText = submitBtn.innerHTML;
         submitBtn.disabled = true;
-        submitBtn.innerHTML = '<span>Sending...</span>';
+        submitBtn.innerHTML = '<span>Sending...</span><i class="bx bx-loader-alt bx-spin"></i>';
 
         try {
           const response = await fetch(form.action, {
@@ -252,17 +264,27 @@
           });
 
           if (response.ok) {
-            formStatus.innerHTML = '<div class="success">Message sent successfully! I\'ll get back to you soon.</div>';
+            formStatus.innerHTML = '<div class="success"><i class="bx bx-check-circle"></i> Message sent successfully! I\'ll get back to you soon.</div>';
+            formStatus.className = 'form-status success';
             form.reset();
+            
+            inputs.forEach(input => input.classList.remove('has-value'));
+
+            setTimeout(() => {
+              formStatus.innerHTML = '';
+              formStatus.className = 'form-status';
+            }, 5000);
           } else {
-            formStatus.innerHTML = '<div class="error">Oops! Something went wrong. Please try again.</div>';
+            formStatus.innerHTML = '<div class="error"><i class="bx bx-error-circle"></i> Something went wrong. Please try again.</div>';
+            formStatus.className = 'form-status error';
           }
         } catch (error) {
-          formStatus.innerHTML = '<div class="error">Oops! Something went wrong. Please try again.</div>';
+          formStatus.innerHTML = '<div class="error"><i class="bx bx-error-circle"></i> Something went wrong. Please try again.</div>';
+          formStatus.className = 'form-status error';
         }
 
         submitBtn.disabled = false;
-        submitBtn.innerHTML = originalText;
+        submitBtn.innerHTML = originalBtnHTML;
       });
     },
 
